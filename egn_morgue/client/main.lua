@@ -17,9 +17,9 @@ end)
 
 Citizen.CreateThread(function() 
 	while true do
+		Wait(1000)
 		if IsMorgued then
 			InvalidateIdleCam()
-			Wait(1000)
 		end
 	end 
 end)
