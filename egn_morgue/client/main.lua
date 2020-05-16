@@ -40,15 +40,16 @@ end)
 
 RegisterNetEvent('esx_morgue:morgue')
 AddEventHandler('esx_morgue:morgue', function(morgueTimer)
-	if IsMorgued then 
+	if IsMorgued then
 		return
 	end
 	Citizen.CreateThread(function()
 		DoScreenFadeOut(20000)
 
 		while not IsScreenFadedOut() do
-			Citizen.Wait(1000)
+			Citizen.Wait(0)
 		end
+		TriggerEvent('esx_ambulancejob:revive', GetPlayerFromServerId(playerPed))
 
 		StopScreenEffect('DeathFailOut')
 		DoScreenFadeIn(20000)
