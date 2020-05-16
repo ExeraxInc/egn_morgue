@@ -57,12 +57,12 @@ AddEventHandler('esx_morgue:sendToGraveyard', function(target, morgueTimer)
 		end
 	end)
 
-	TriggerClientEvent('esx_ambulancejob:revive', target)
-	TriggerClientEvent('chat:addMessage', -1, {
-		template = '<div style="padding: 0.5vw; margin: 0.5vw; background-color: rgba(58, 58, 52, 0.6); border-radius: 3px;"><i class="fas fa-cross"></i> <b>Morgue</b> {1}</div>',
-		args = { _U('morgue'), _U('morgued_msg', GetCharacterName(target), ESX.Math.Round(morgueTimer / 60)) }, color = { 79, 0, 4 } 
-	})
-	TriggerClientEvent('esx_morgue:morgue', target, morgueTimer)
+    TriggerClientEvent('chat:addMessage', -1, {
+        template = '<div style="padding: 0.5vw; margin: 0.5vw; background-color: rgba(58, 58, 52, 0.6); border-radius: 3px;"><i class="fas fa-cross"></i> <b>Morgue</b> {1}</div>',
+        args = { _U('morgue'), _U('morgued_msg', GetCharacterName(target), ESX.Math.Round(morgueTimer / 60)) }, color = { 79, 0, 4 } 
+    })
+    Wait(500)
+    TriggerClientEvent('esx_morgue:morgue', target, morgueTimer)
 end)
 
 -- should the player be in graveyard?
@@ -83,13 +83,13 @@ ESX.RegisterServerCallback('esx_morgue:checkMorgue', function(source, cb)
 		end
 	end)
 end)
--- unjail after time served
+-- unmorgue after time served
 RegisterServerEvent('esx_morgue:unmorgueTime')
 AddEventHandler('esx_morgue:unmorgueTime', function()
 	unmorgue(source)
 end)
 
--- keep jailtime updated
+-- keep update the remining time
 RegisterServerEvent('esx_morgue:updateRemaining')
 AddEventHandler('esx_morgue:updateRemaining', function(morgueTimer)
 	local identifier = GetPlayerIdentifiers(source)[1]
