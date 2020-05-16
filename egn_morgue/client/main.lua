@@ -124,7 +124,8 @@ AddEventHandler('esx_morgue:morgue', function(morgueTimer)
 			
 			ESX.Game.Teleport(playerPed, GraveyardLocation)
 			IsMorgued = true
-			TaskStartScenarioInPlace(playerPed, "WORLD_HUMAN_SUNBATHE_BACK", 0, true)
+			loadanimdict('missarmenian2')
+    		TaskPlayAnim(GetPlayerPed(-1), 'missarmenian2', 'corpse_search_exit_ped', 8.0, -8,-1, 2, 0, 0, 0, 0)
 			unmorgued = false
 			while MorgueTime > 0 and not unmorgued do
 				playerPed = PlayerPedId()
@@ -228,4 +229,13 @@ function draw2dText(text, pos)
 	BeginTextCommandDisplayText('STRING')
 	AddTextComponentSubstringPlayerName(text)
 	EndTextCommandDisplayText(table.unpack(pos))
+end
+
+function loadanimdict(dictname)
+	if not HasAnimDictLoaded(dictname) then
+		RequestAnimDict(dictname) 
+		while not HasAnimDictLoaded(dictname) do 
+			Citizen.Wait(1)
+		end
+	end
 end
