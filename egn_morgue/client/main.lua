@@ -125,7 +125,7 @@ AddEventHandler('esx_morgue:morgue', function(morgueTimer)
 			ESX.Game.Teleport(playerPed, GraveyardLocation)
 			IsMorgued = true
 			loadanimdict('missarmenian2')
-    		TaskPlayAnim(GetPlayerPed(-1), 'missarmenian2', 'corpse_search_exit_ped', 8.0, -8,-1, 2, 0, 0, 0, 0)
+    		TaskPlayAnim(playerPed, 'missarmenian2', 'corpse_search_exit_ped', 8.0, -8,-1, 2, 0, 0, 0, 0)
 			unmorgued = false
 			while MorgueTime > 0 and not unmorgued do
 				playerPed = PlayerPedId()
