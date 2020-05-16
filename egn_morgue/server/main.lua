@@ -66,8 +66,7 @@ AddEventHandler('esx_morgue:sendToGraveyard', function(target, morgueTimer)
 end)
 
 -- should the player be in graveyard?
-RegisterServerEvent('esx_morgue:checkMorgue')
-AddEventHandler('esx_morgue:checkMorgue', function()
+ESX.RegisterServerCallback('esx_morgue:checkMorgue', function(source, cb)
 	local _source = source -- cannot parse source to client trigger for some weird reason
 	local identifier = GetPlayerIdentifiers(_source)[1] -- get steam identifier
 
@@ -80,10 +79,10 @@ AddEventHandler('esx_morgue:checkMorgue', function()
 				args = { _U('morgue'), _U('morgued_msg', GetCharacterName(_source), ESX.Math.Round(result[1].morgue_time / 60)) }, color = { 79, 0, 4 } 
 			})
 			TriggerClientEvent('esx_morgue:morgue', _source, tonumber(result[1].morgue_time))
+			cb(true)
 		end
 	end)
 end)
-
 -- unjail after time served
 RegisterServerEvent('esx_morgue:unmorgueTime')
 AddEventHandler('esx_morgue:unmorgueTime', function()
